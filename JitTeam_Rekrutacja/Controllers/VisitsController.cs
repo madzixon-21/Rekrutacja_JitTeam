@@ -90,7 +90,7 @@ namespace JitTeam_Rekrutacja.Controllers
         {
             if (_context.Visits.Any(e => e.Appointment == visit.Appointment))
             {
-                 return BadRequest("installation id is null or empty"); 
+                 return BadRequest("Appointment hour is used"); 
             }
 
             if (visit.Appointment.Minute != 00 && visit.Appointment.Second != 0)
