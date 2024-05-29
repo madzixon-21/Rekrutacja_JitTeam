@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JitTeam_Rekrutacja.Models;
 using System.Runtime.CompilerServices;
+using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JitTeam_Rekrutacja.Controllers
 {
@@ -86,6 +88,22 @@ namespace JitTeam_Rekrutacja.Controllers
         [HttpPost]
         public async Task<ActionResult<Visit>> PostVisit(Visit visit)
         {
+            if (_context.Visits.Any(e => e.Appointment == visit.Appointment))
+            {
+                 return BadRequest("installation id is null or empty"); 
+            }
+
+            if (visit.Appointment.Minute != 00 && visit.Appointment.Second != 0)
+            {
+                return BadRequest("Apopointment hour is not full");
+            }
+
+            if (visit.Appointment.Hour <8 || visit.Appointment.Hour > 16)
+            {
+                return BadRequest("There is no veterinanrian at this time");
+            }
+
+
             _context.Visits.Add(visit);
             await _context.SaveChangesAsync();
 
