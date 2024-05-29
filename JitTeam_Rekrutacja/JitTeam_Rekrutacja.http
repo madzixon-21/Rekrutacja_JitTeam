@@ -1,0 +1,6 @@
+@JitTeam_Rekrutacja_HostAddress = http://localhost:5210
+
+GET {{JitTeam_Rekrutacja_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
